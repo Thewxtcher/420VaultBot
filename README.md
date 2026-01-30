@@ -1,307 +1,190 @@
 # 420VaultBot
-🌿 420VaultBot
+420VaultBot 🌿🔍
 
-Advanced Discord Search & Indexing Bot
+A smart Discord bot for searching, filtering, and delivering plugin & kit links on demand
 
-420VaultBot is a high-performance Discord utility bot built to index, search, and intelligently route large libraries of external links (plugins, presets, kits, tools, resources, etc.) without flooding channels or hosting files.
+420VaultBot is a custom Discord search bot designed to handle huge, messy link vaults (5,000+ links) and return clean, relevant results based on user keywords — without spamming channels.
 
-Designed for scale, precision, and automation.
-
-🚀 What Is 420VaultBot?
-
-420VaultBot acts like a search engine inside Discord.
-
-Instead of dumping thousands of links into channels, it:
-
-indexes link lists
-
-intelligently parses URLs
-
-ranks results by relevance
-
-returns clean, searchable results on demand
-
-No files are hosted.
-No content is downloaded.
-Only external HTTPS links are indexed.
+Instead of dumping links endlessly, the bot works like a search bar for your server.
 
 ✨ Features
 
-🔎 Advanced multi-keyword search
+🔎 Keyword-based searching (multiple keywords supported)
 
-🧠 URL path cleaning & keyword normalization
+📂 Reads from large link lists (lists.txt, lists_part_2.txt, etc.)
 
-🖥️ Platform-aware filtering (Windows / macOS / installers)
+🎯 Randomized results to avoid repeats
 
-📊 Confidence-based result ranking
+🧠 Smart filtering (plugin names, platforms, installers, keywords)
 
-🎯 Randomized sampling to prevent spam
+📦 Clean embeds (no spam walls)
 
-📦 Supports multiple large link files
+⚙️ Fully customizable & self-hosted
 
-🧵 Embed pagination (no message flooding)
+🛠 Built for VS Code + WSL (easy setup)
 
-🔐 Admin-only maintenance commands
+🧾 Requirements
 
-📡 Channel-aware result dispatching
+You only need:
 
-⚡ Runs locally, via WSL, or on a server
+Windows 10 or 11
 
-❌ What 420VaultBot Does NOT Do
+Visual Studio Code
 
-420VaultBot does not:
+Discord Bot Token
 
-host files
+WSL (Windows Subsystem for Linux)
 
-upload content
+No Docker. No paid services. No nonsense.
 
-download resources
+🚀 Installation (Simple Method)
+1️⃣ Download the Bot
 
-bypass DRM
+Download or clone this repository from GitHub
 
-modify third-party software
+Extract the folder somewhere easy (Desktop is fine)
 
-All indexed links are user-provided.
-Server owners are responsible for their own content sources.
+2️⃣ Install VS Code
 
-🛠️ Requirements
-System
+Download and install VS Code:
+👉 https://code.visualstudio.com/
 
-Python 3.10+
+During install, check these boxes:
 
-Internet connection
+✅ Add to PATH
 
-Discord account with developer access
+✅ Open with Code
 
-Python Dependencies
+🐧 Installing WSL (Beginner-Friendly, Step by Step)
 
-discord.py
+What is WSL?
+WSL (Windows Subsystem for Linux) lets you run Linux inside Windows without dual-booting or virtual machines.
 
-Standard Python libraries (asyncio, os, re, random, etc.)
+420VaultBot runs best in a Linux environment — WSL gives you that with almost no effort.
 
-📦 Installation
-1️⃣ Clone the Repository
-git clone https://github.com/YOUR_USERNAME/420VaultBot.git
-cd 420VaultBot
+You do not need prior Linux knowledge.
+Open PowerShell as Administrator, then run:
 
-2️⃣ Create a Virtual Environment (Recommended)
-Windows
-python -m venv venv
-venv\Scripts\activate
+wsl --install
 
-Linux / macOS / WSL
-python3 -m venv venv
-source venv/bin/activate
 
-3️⃣ Install Dependencies
-pip install -U discord.py
+Restart your PC when it finishes.
 
-🤖 Discord Bot Setup
-1️⃣ Create the Bot
+Ubuntu will be installed automatically.
 
-Visit https://discord.com/developers/applications
+4️⃣ Open the Bot in VS Code (WSL Mode)
 
-Click New Application
+Open VS Code
 
-Go to Bot → Add Bot
+Press Ctrl + Shift + P
 
-Copy the Bot Token
+Type:
 
-⚠️ Never share your bot token publicly
+WSL: Open Folder
 
-2️⃣ Enable Required Intents
 
-In the Discord Developer Portal, enable:
+Select the 420VaultBot folder
 
-✅ Message Content Intent
-
-✅ Server Members Intent
-
-✅ Presence Intent (optional)
+You are now running inside Linux (WSL).
 
 ⚙️ Configuration
+1️⃣ Install Python Dependencies
 
-All configuration is located at the top of the main bot file.
+Open the VS Code terminal (Ctrl + `) and run:
 
-🔑 Bot Token (Environment Variable Recommended)
-Windows (PowerShell)
-setx DISCORD_420VAULT_TOKEN "YOUR_BOT_TOKEN"
+sudo apt update
+sudo apt install python3 python3-pip -y
+pip3 install -r requirements.txt
 
-Linux / macOS / WSL
-export DISCORD_420VAULT_TOKEN="YOUR_BOT_TOKEN"
+2️⃣ Add Your Discord Bot Token
 
+Open the main bot file (example: bot.py)
+Find:
 
-The bot will automatically prefer the environment variable over hardcoded values.
-
-🧵 Command Prefix
-PREFIX = "#"
+BOT_TOKEN = "YOUR_TOKEN_HERE"
 
 
-Example usage:
+Replace it with your real token from:
+👉 https://discord.com/developers/applications
 
+⚠️ Never upload your real token to GitHub
+
+3️⃣ Link Files Setup
+
+Make sure your files exist in the bot folder:
+
+lists.txt
+lists_part_2.txt
+lists_part_3.txt
+
+
+You can add or remove list files — the bot auto-loads them.
+
+▶️ Running the Bot
+
+In the VS Code terminal:
+
+python3 bot.py
+
+
+If you see:
+
+Bot is online
+
+
+You’re live 🚀
+
+💬 Example Commands
 #searchkit omnisphere win installer
+#searchkit kontakt drum kit
+#searchkit serum preset pack
 
-📂 Link Files
-LINKS_FILES = [
-    "lists.txt",
-    "lists_part_2.txt",
-    "lists_part_3.txt"
-]
 
+The bot will:
 
-Each file:
+Search all lists
 
-One URL per line
+Filter junk
 
-No categories required
+Send a clean result to the correct channel
 
-Supports tens of thousands of links
+🧠 How It Works (High Level)
 
-Duplicate links are automatically removed
+Loads thousands of links into memory
 
-📡 Target Channels
-TARGET_CHANNEL_NAMES = [
-    "zenology-bank",
-    "omnisphere-bank",
-    "🥁-drumkits-sounds"
-]
+Normalizes URLs for better matching
 
+Scores results based on keyword relevance
 
-Channels are resolved on startup.
-420VaultBot will only post where it has permission.
+Randomizes output to prevent repeats
 
-▶️ Running 420VaultBot
-python bot.py
+Limits results to avoid spam
 
+This makes it fast, quiet, and scalable.
 
-Expected output:
+🔐 Security Notes
 
-420VaultBot is online.
-Loaded XXXX unique links.
-Target channels resolved successfully.
+Do NOT commit your bot token
 
-🧠 How the Search Engine Works
+Keep private vault links private
 
-Links are loaded into memory from text files
+This bot is intended for controlled servers only
 
-URL paths are cleaned and normalized
+🛠 Customization
 
-Keywords are matched against:
+You can easily:
 
-raw URL paths
+Change command names
 
-cleaned semantic paths
+Add platform filters (Win / Mac)
 
-Platform terms (win, mac, installer) use explicit detection
+Add per-channel restrictions
 
-Results are ranked by confidence
+Expand to paid/custom client bots
 
-A clean, randomized subset is displayed
+This project is designed to be extended.
 
-This prevents:
+📜 License
 
-spam
-
-repetitive results
-
-channel flooding
-
-📜 Command Reference
-🔎 #searchkit
-
-Searches indexed links using advanced logic.
-
-Examples
-
-#searchkit omnisphere win installer
-#searchkit serum preset bank
-#searchkit scope:plugin vital mac
-#searchkit drumkit trap loops
-
-
-Supports:
-
-multiple keywords
-
-platform filtering
-
-result ranking
-
-embed pagination
-
-📤 #sendlink
-
-Searches and sends one random match to a target channel.
-
-#sendlink omnisphere zenology-bank
-
-🔄 #reloadlinks (Admin)
-
-Reloads all link files without restarting the bot.
-
-📡 #resolvelinks (Admin)
-
-Re-resolves configured target channels.
-
-📋 #showchannels
-
-Displays all configured channels and their status.
-
-📊 #status
-
-Shows:
-
-number of loaded links
-
-resolved channels
-
-command prefix
-
-🔐 Permissions
-
-Minimum required permissions:
-
-Read Messages
-
-Send Messages
-
-Embed Links
-
-Read Message History
-
-Admin commands require elevated permissions.
-
-🧪 Development Notes
-
-No database required
-
-No cloud dependencies
-
-Designed for local or VPS hosting
-
-Easily forkable and extendable
-
-Modular functions for reuse in other bots
-
-🧭 Roadmap Ideas
-
-Live link scraping
-
-Database-backed indexing
-
-Per-server datasets
-
-Web dashboard
-
-API access
-
-Plugin-based modules
-
-⚠️ Disclaimer
-
-420VaultBot is provided as-is for educational and organizational purposes.
-The developer does not host, distribute, or control third-party content indexed by this bot.
-
-🧠 Author
-
-420VaultBot was built from scratch, with original logic, architecture, and systems design.
+This project is for educational and private server use.
+DO NOT SELL OR REDISTROBUT UNDER ANYT CIRCUMSTANCES PERSONAL USE ONLY AUTHOR IS NOT RESPONSIBLE FOR ACTIONS TAKEN AGAINST ACCOUNTS 
