@@ -1,0 +1,20 @@
+# Discord library for bot functionality
+discord.py==2.3.3
+
+# Async support (already part of Python, but explicitly for clarity)
+async-timeout==4.0.2
+
+# For URL parsing, regex, etc.
+yarl==1.9.2
+multidict==6.0.4
+attrs==23.1.0
+frozenlist==1.4.0
+
+# For optional logging/pretty printing (if you want later)
+colorama==0.4.6
+
+# Utilities for HTTP requests (if you expand bot to web scraping)
+aiohttp==3.9.5
+
+# Optional: advanced embedding support (already part of discord.py but safer to pin)
+typing_extensions==4.7.1
